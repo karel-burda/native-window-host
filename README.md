@@ -6,7 +6,7 @@
 
 Java concept uses `Java Native Access` and C# uses `HwndHost` from the WPF framework.
 
-See [java](java) for Java implementation and [csharp](C#) for C# implementation with WPF.
+See [java](java) for Java implementation and [C#](csharp) for C# implementation with WPF.
 
 # Build Process
 TODO
