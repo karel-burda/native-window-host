@@ -1,0 +1,23 @@
+stages:
+  - build
+
+notifications:
+  email:
+    on_success: never
+    on_failure: always
+    recipients:
+      - karelburda89@gmail.com
+
+jobs:
+  include:
+     - stage: buuld
+       dist: trusty
+       os: linux
+       language: java
+       jdk: oraclejdk8
+       script:
+         - set -e
+
+         - echo $JAVA_HOME
+
+         - set +e
