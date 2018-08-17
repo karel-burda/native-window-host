@@ -15,6 +15,10 @@ jobs:
        os: linux
        language: java
        jdk: oraclejdk8
+       addons:
+         apt:
+           packages:
+             - jna
        script:
          - set -e
 
