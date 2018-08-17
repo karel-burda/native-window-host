@@ -1,4 +1,4 @@
-![Version](https://img.shields.io/badge/version-0.0.1-green.svg)
+![Version](https://img.shields.io/badge/version-0.2.0-green.svg)
 [![License](https://img.shields.io/badge/license-MIT_License-green.svg?style=flat)](LICENSE)
 
 # Introduction
@@ -22,7 +22,7 @@ The concept is using the `HwndHost` component from WPF that effectively works we
 The only catch is to use set the correct window style to the native window (`WS_CHILD`).
 
 # Build Process
-TODO
+Java project is built using CMake: [CMakeLists.txt](java/windows/CMakeLists.txt).
 
 # Unit Tests
 TODO
