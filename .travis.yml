@@ -19,5 +19,6 @@ jobs:
          - set -e
 
          - echo $JAVA_HOME
+         - cmake -Bbuild -H.
 
          - set +e
