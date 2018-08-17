@@ -15,17 +15,14 @@ jobs:
        os: linux
        language: java
        jdk: oraclejdk8
-       addons:
-         apt:
-           packages:
-             - libjna
        script:
          - set -e
 
          - echo $JAVA_HOME
          - cmake -Bbuild -H.
 
-         - cmake -Bbuild/java -Hjava/windows
+         - wget -O java/windows/jna/jna.jar http://central.maven.org/maven2/net/java/dev/jna/jna/4.5.2/jna-4.5.2.jar
+         - cmake -Bbuild/java -Hjava/windows -DJNA_PATH:STRING=java/windows/jna
          - cmake --build build/java
 
          - set +e
