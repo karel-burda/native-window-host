@@ -3,7 +3,7 @@
 
 cmake_minimum_required (VERSION 3.8 FATAL_ERROR)
 
-project (native-window-embedder VERSION 0.2.0 LANGUAGES Java)
+project (native-window-embedder-java VERSION 0.2.0 LANGUAGES Java)
 
 find_package(Java REQUIRED)
 include(UseJava)
