@@ -21,7 +21,7 @@ jobs:
          - echo $JAVA_HOME
          - cmake -Bbuild -H.
 
-         - wget http://central.maven.org/maven2/net/java/dev/jna/jna/4.5.2/jna-4.5.2.jar -O java/windows/jna/jna.jar
+         - wget http://central.maven.org/maven2/net/java/dev/jna/jna/4.5.2/jna-4.5.2.jar -O java/windows/jna.jar
          - cmake -Bbuild/java -Hjava/windows -DJNA_PATH:STRING=java/windows/jna
          - cmake --build build/java
 
