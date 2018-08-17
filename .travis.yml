@@ -20,6 +20,8 @@ jobs:
 
          - echo $JAVA_HOME
          - cmake -Bbuild -H.
+
          - cmake -Bbuild/java -Hjava/windows
+         - cmake --build build/java
 
          - set +e
