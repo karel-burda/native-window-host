@@ -1,0 +1,7 @@
+# Base template origin: https://github.com/karel-burda/git-helpers
+# Version: 0.2
+
+# General shared ignores
+build
+CMakeFiles
+.DS_Store
