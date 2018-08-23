@@ -1,4 +1,4 @@
-![Version](https://img.shields.io/badge/version-0.2.0-green.svg)
+![Version](https://img.shields.io/badge/version-0.3.0-green.svg)
 [![License](https://img.shields.io/badge/license-MIT_License-green.svg?style=flat)](LICENSE)
 [![Build Status](https://travis-ci.org/karel-burda/native-window-embedder.svg?branch=master)](https://travis-ci.org/karel-burda/native-window-embedder)
 
