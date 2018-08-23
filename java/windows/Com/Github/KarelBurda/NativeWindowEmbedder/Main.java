@@ -1,3 +1,5 @@
+package Com.Github.KarelBurda.NativeWindowEmbedder;
+
 import javax.swing.JFrame;
 
 public class Main {
