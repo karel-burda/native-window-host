@@ -1,4 +1,4 @@
-package Com.Github.KarelBurda.NativeWindowEmbedder;
+package com.github.karelburda.nativewindowembedder;
 
 import com.sun.jna.Native;
 import com.sun.jna.platform.win32.User32;
