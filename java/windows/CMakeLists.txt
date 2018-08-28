@@ -43,7 +43,9 @@ _print_status_message("Classes are compiled to ${_class_location}")
 enable_testing()
 
 #Run using: java -cp build/native-window-embedder-java.jar;.;jna-platform.jar;jna.jar com.github.karelburda.nativewindowembedder.Main
+set(_command_demo "${Java_JAVA_EXECUTABLE} -cp ${_jar_location};${JNA_PATH}/jna-platform.jar;${JNA_PATH}/jna.jar com.github.karelburda.nativewindowembedder.Main")
+_print_status_message("Will use this command for the run-demo target: ${_command_demo}")
 add_custom_target(run-demo
-    COMMAND dir && ${Java_JAVA_EXECUTABLE} -cp ${_jar_location};${JNA_PATH}/jna-platform.jar;${JNA_PATH}/jna.jar com.github.karelburda.nativewindowembedder.Main
+    COMMAND ${_command_demo}
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     DEPENDS ${PROJECT_NAME})
