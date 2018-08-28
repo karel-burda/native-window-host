@@ -1,4 +1,4 @@
-package Com.Github.KarelBurda.NativeWindowEmbedder;
+package com.github.karelburda.nativewindowembedder;
 
 import javax.swing.JFrame;
 
