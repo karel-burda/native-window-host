@@ -20,16 +20,10 @@ _print_status_message("Using this path to the JNA: ${JNA_PATH}")
 
 set(CMAKE_JAVA_COMPILE_FLAGS "-source" "1.8" "-target" "1.8")
 
-# TODO: Use 2 jars
-
-configure_file(MANIFEST.mf.in ${CMAKE_CURRENT_SOURCE_DIR}/MANIFEST.mf @ONLY)
-
 add_jar(
     ${PROJECT_NAME}
         source/com/github/karel-burda/native-window-embedder/NativeWindowEmbedder.java
         source/com/github/karel-burda/native-window-embedder/Main.java
-    MANIFEST
-        MANIFEST.mf
     INCLUDE_JARS
         ${JNA_PATH}/jna.jar
         ${JNA_PATH}/jna-platform.jar)
@@ -37,13 +31,17 @@ add_jar(
 get_target_property(_jar_location ${PROJECT_NAME} JAR_FILE)
 get_target_property(_class_location ${PROJECT_NAME} CLASSDIR)
 
-_print_status_message("Jar file is located at: ${_jar_location}")
-_print_status_message("Classes are compiled to ${_class_location}")
+set(_class_path_separator ":")
+if (WIN32)
+    set(_class_path_separator ";")
+endif()
+
+add_custom_target(run-demo
+    COMMAND
+        ${Java_JAVA_EXECUTABLE} -cp "${_jar_location}${_class_path_separator}${JNA_PATH}/jna.jar${_class_path_separator}${JNA_PATH}/jna-platform.jar"
+        com.github.karelburda.nativewindowembedder.Main
+    DEPENDS ${PROJECT_NAME})
 
 enable_testing()
 
-#Run using: java -cp build/native-window-embedder-java.jar;.;jna-platform.jar;jna.jar com.github.karelburda.nativewindowembedder.Main
-add_custom_target(run-demo
-    COMMAND dir && ${Java_JAVA_EXECUTABLE} -cp ${_jar_location};${JNA_PATH}/jna-platform.jar;${JNA_PATH}/jna.jar com.github.karelburda.nativewindowembedder.Main
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    DEPENDS ${PROJECT_NAME})
+# TODO: add test using ctest and custom command
