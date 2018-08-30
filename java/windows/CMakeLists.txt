@@ -23,25 +23,37 @@ set(CMAKE_JAVA_COMPILE_FLAGS "-source" "1.8" "-target" "1.8")
 add_jar(
     ${PROJECT_NAME}
         source/com/github/karel-burda/native-window-embedder/NativeWindowEmbedder.java
-        source/com/github/karel-burda/native-window-embedder/Main.java
     INCLUDE_JARS
         ${JNA_PATH}/jna.jar
         ${JNA_PATH}/jna-platform.jar)
 
-get_target_property(_jar_location ${PROJECT_NAME} JAR_FILE)
-get_target_property(_class_location ${PROJECT_NAME} CLASSDIR)
+get_target_property(_jar_path_core ${PROJECT_NAME} JAR_FILE)
 
-set(_class_path_separator ":")
+add_jar(
+    ${PROJECT_NAME}-demo
+        source/com/github/karel-burda/native-window-embedder/Main.java
+    INCLUDE_JARS
+        ${_jar_path_core})
+
+get_target_property(_jar_path_demo ${PROJECT_NAME}-demo JAR_FILE)
+
+set(_separator ":")
 if (WIN32)
-    set(_class_path_separator ";")
+    set(_separator ";")
 endif()
 
 add_custom_target(run-demo
     COMMAND
-        ${Java_JAVA_EXECUTABLE} -cp "${_jar_location}${_class_path_separator}${JNA_PATH}/jna.jar${_class_path_separator}${JNA_PATH}/jna-platform.jar"
+        ${Java_JAVA_EXECUTABLE} -cp "${_jar_path_demo}${_separator}${_jar_path_core}${_separator}${JNA_PATH}/jna.jar${_separator}${JNA_PATH}/jna-platform.jar"
         com.github.karelburda.nativewindowembedder.Main
     DEPENDS ${PROJECT_NAME})
 
 enable_testing()
+
+#add_test(NAME death-tests
+#         COMMAND testDriver --config $<CONFIGURATION> --exe $<TARGET_FILE:myexe>)
+
+#add_test(NAME unit-tests
+#         COMMAND testDriver --config $<CONFIGURATION> --exe $<TARGET_FILE:myexe>)
 
 # TODO: add test using ctest and custom command
