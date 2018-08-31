@@ -47,8 +47,8 @@ cmake --build build --target run-demo
 ## Java
 Unit tests are divided into 2 parts:
 * headless -- working without the GUI (e.g. for testing in the CI environment without X11)
-* headfull
+* headfull -- full GUI tests (project uses `Canvas` from the `java.awt`)
 
 # Continuous Integration
 ## Java
-Build of the project (multiple JARs) is done, see [.travis.yml](java/windows/.travis.yml).
+Build of the project (multiple JARs) is done, see [.travis.yml](.travis.yml).
