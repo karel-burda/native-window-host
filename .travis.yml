@@ -21,8 +21,7 @@ jobs:
          - wget http://central.maven.org/maven2/net/java/dev/jna/jna/4.5.2/jna-4.5.2.jar -O java/windows/jna.jar
          - wget http://central.maven.org/maven2/net/java/dev/jna/jna-platform/4.5.2/jna-platform-4.5.2.jar -O java/windows/jna-platform.jar
          - pushd java/windows
-         - cmake -Bbuild -H. -DJNA_PATH:PATH=$(pwd)
+         - cmake -Bbuild -H. -DJNA_PATH:PATH="$(pwd)"
          - cmake --build build
-         - cmake --build build --target run-demo
 
          - set +e

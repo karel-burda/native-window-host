@@ -1,2 +1,0 @@
-Main-Class: com.github.karelburda.nativewindowembedder.Main
-Class-Path: .;@JNA_PATH@/jna.jar;@JNA_PATH@/jna-platform.jar

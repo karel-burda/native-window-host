@@ -1,6 +1,8 @@
-package com.github.karelburda.nativewindowembedder;
+package com.github.karelburda.nativewindowembedder.demo;
 
 import javax.swing.JFrame;
+
+import com.github.karelburda.nativewindowembedder.NativeWindowEmbedder;
 
 public class Main {
     private static void showUsage() {
@@ -10,7 +12,7 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
-        NativeWindowEmbedder embedder = new NativeWindowEmbedder();
+        NativeWindowEmbedder embedder = new NativeWindowEmbedder("foo");
         embedder.setSize(600, 400);
         embedder.setVisible(true);
 

@@ -1,2 +1,0 @@
-Main-Class: com.github.karelburda.nativewindowembedder.Main
-Class-Path: .;C:/burda/projects/native-window-embedder/java/windows/jna.jar;C:/burda/projects/native-window-embedder/java/windows/jna-platform.jar
