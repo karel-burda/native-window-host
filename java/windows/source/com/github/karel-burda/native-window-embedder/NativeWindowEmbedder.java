@@ -7,10 +7,25 @@ import java.awt.Canvas;
 import java.awt.Graphics;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import com.github.karelburda.nativewindowembedder.exceptions.InvalidNativeHandle;
+import com.github.karelburda.nativewindowembedder.exceptions.NullNativeWindowClassName;
+
 public class NativeWindowEmbedder extends Canvas {
+    private String nativeWindowId = null;
     private HWND embedded = null;
     private HWND embedder = null;
     private AtomicBoolean isHostingNativeWindow = new AtomicBoolean(false);
+
+    private NativeWindowEmbedder() {
+    }
+
+    public NativeWindowEmbedder(final String nativeWindowClassName) throws NullNativeWindowClassName {
+        nativeWindowId = nativeWindowClassName;
+
+        if (nativeWindowId == null) {
+            throw new NullNativeWindowClassName();
+        }
+    }
 
     @Override
     public void removeNotify() {
@@ -27,8 +42,8 @@ public class NativeWindowEmbedder extends Canvas {
     }
 
     @Override
-    public void paint(final Graphics $graphics) {
-        super.paint($graphics);
+    public void paint(final Graphics graphics) {
+        super.paint(graphics);
 
         embedNativeWindow();
 
@@ -54,9 +69,13 @@ public class NativeWindowEmbedder extends Canvas {
         }
     }
 
-    private void loadNativeHandleOfEmbedded() {
+    private void loadNativeHandleOfEmbedded() throws InvalidNativeHandle {
         if (embedded == null) {
-            embedded = getHwndOfNativeWindow("desired-win32-class-name");
+            embedded = getHwndOfNativeWindow(nativeWindowId);
+        }
+
+        if (embedded == null) {
+            throw new InvalidNativeHandle("Cannot get native handle of the window to be embedded");
         }
     }
 
@@ -74,7 +93,7 @@ public class NativeWindowEmbedder extends Canvas {
         return hwnd;
     }
 
-    private HWND getHwndOfNativeWindow(final String $className) {
-        return User32.INSTANCE.FindWindow($className, null);
+    private HWND getHwndOfNativeWindow(final String windowClassName) {
+        return User32.INSTANCE.FindWindow(windowClassName, null);
     }
 }
