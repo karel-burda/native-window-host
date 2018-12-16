@@ -3,11 +3,7 @@
 
 cmake_minimum_required (VERSION 3.8 FATAL_ERROR)
 
-project (native-window-embedder-java VERSION 0.3.2 LANGUAGES Java)
-
-include("../../cmake-helpers/cmake-helpers/messages.cmake")
-
-_print_project_version()
+project(native-window-embedder-java VERSION 0.4.0 LANGUAGES Java)
 
 find_package(Java REQUIRED)
 include(UseJava)
@@ -16,15 +12,15 @@ if (NOT JNA_PATH)
     message(FATAL_ERROR "Please specify absolute path to the JNA using the JNA_PATH=<path> attribute")
 endif()
 
-_print_status_message("Using this path to the JNA: ${JNA_PATH}")
+message(STATUS "Using this path to the JNA: ${JNA_PATH}")
 
-set(CMAKE_JAVA_COMPILE_FLAGS "-source" "1.8" "-target" "1.8")
+set(APPEND CMAKE_JAVA_COMPILE_FLAGS "-source" "1.8" "-target" "1.8")
 
 add_jar(
     ${PROJECT_NAME}
         source/com/github/karel-burda/native-window-embedder/NativeWindowEmbedder.java
-        source/com/github/karel-burda/native-window-embedder/exceptions/NullNativeWindowClassName.java
         source/com/github/karel-burda/native-window-embedder/exceptions/InvalidNativeHandle.java
+
     INCLUDE_JARS
         ${JNA_PATH}/jna.jar
         ${JNA_PATH}/jna-platform.jar)
@@ -35,7 +31,9 @@ add_jar(
     ${PROJECT_NAME}-demo
         source/com/github/karel-burda/native-window-embedder/demo/Main.java
     INCLUDE_JARS
-        ${_jar_path_core})
+        ${_jar_path_core}
+        ${JNA_PATH}/jna.jar
+        ${JNA_PATH}/jna-platform.jar)
 
 get_target_property(_jar_path_demo ${PROJECT_NAME}-demo JAR_FILE)
 

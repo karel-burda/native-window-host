@@ -8,10 +8,8 @@ import java.awt.Graphics;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.github.karelburda.nativewindowembedder.exceptions.InvalidNativeHandle;
-import com.github.karelburda.nativewindowembedder.exceptions.NullNativeWindowClassName;
 
 public class NativeWindowEmbedder extends Canvas {
-    private String nativeWindowId = null;
     private HWND embedded = null;
     private HWND embedder = null;
     private AtomicBoolean isHostingNativeWindow = new AtomicBoolean(false);
@@ -19,18 +17,17 @@ public class NativeWindowEmbedder extends Canvas {
     private NativeWindowEmbedder() {
     }
 
-    public NativeWindowEmbedder(final String nativeWindowClassName) throws NullNativeWindowClassName {
-        nativeWindowId = nativeWindowClassName;
+    public NativeWindowEmbedder(final HWND nativeWindowHandle) throws InvalidNativeHandle {
+        embedded = nativeWindowHandle;
 
-        if (nativeWindowId == null) {
-            throw new NullNativeWindowClassName();
-        }
+        checkNativeHandleOfEmbedded();
     }
 
     @Override
     public void removeNotify() {
         // According to the WinAPI documentation, following should be called as well, but it doesn't work:
         // User32.INSTANCE.SetWindowLong(microcoreHwnd, User32.GWL_STYLE, User32.WS_POPUP);
+        // TODO: ensure that the embedded window has correct style in order to become child
 
         // todo: inspect return codes.
         User32.INSTANCE.ShowWindow(embedded, User32.INSTANCE.SW_HIDE);
@@ -52,7 +49,6 @@ public class NativeWindowEmbedder extends Canvas {
 
     private void embedNativeWindow() {
         if (!isHostingNativeWindow.get()) {
-            loadNativeHandleOfEmbedded();
             loadNativeHandleOfEmbedder();
 
             if (embedded != null && embedder != null) {
@@ -69,31 +65,22 @@ public class NativeWindowEmbedder extends Canvas {
         }
     }
 
-    private void loadNativeHandleOfEmbedded() throws InvalidNativeHandle {
+    private void checkNativeHandleOfEmbedded() throws InvalidNativeHandle {
         if (embedded == null) {
-            embedded = getHwndOfNativeWindow(nativeWindowId);
+            throw new InvalidNativeHandle("Native handle is null");
         }
 
-        if (embedded == null) {
-            throw new InvalidNativeHandle("Cannot get native handle of the window to be embedded");
-        }
+        // TODO: check whether handle is valid
     }
 
-    private HWND loadNativeHandleOfEmbedder() {
+    private void loadNativeHandleOfEmbedder() {
         // we need to resolve own HWND everytime, because the Canvas component binds to different native handle
         // everytime the underlying "addNotify()" is called
-        HWND hwnd = null;
 
         try {
-            hwnd = new HWND(Native.getComponentPointer(this));
+            embedder = new HWND(Native.getComponentPointer(this));
         } catch (final Exception exception) {
-            // todo, component might not be on the screen, etc.
+            // TODO: component might not be on the screen, etc.
         }
-
-        return hwnd;
-    }
-
-    private HWND getHwndOfNativeWindow(final String windowClassName) {
-        return User32.INSTANCE.FindWindow(windowClassName, null);
     }
 }

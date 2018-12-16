@@ -1,18 +1,10 @@
-stages:
-  - build
-
-notifications:
-  email:
-    on_success: never
-    on_failure: always
-    recipients:
-      - karelburda89@gmail.com
+git:
+  depth: 1
 
 jobs:
   include:
-     - stage: buuld
-       dist: trusty
-       os: linux
+     - stage: build
+       os: windows
        language: java
        jdk: oraclejdk8
        script:
@@ -20,7 +12,8 @@ jobs:
 
          - wget http://central.maven.org/maven2/net/java/dev/jna/jna/4.5.2/jna-4.5.2.jar -O java/windows/jna.jar
          - wget http://central.maven.org/maven2/net/java/dev/jna/jna-platform/4.5.2/jna-platform-4.5.2.jar -O java/windows/jna-platform.jar
-         - pushd java/windows
+
+         - cd java/windows
          - cmake -Bbuild -H. -DJNA_PATH:PATH="$(pwd)"
          - cmake --build build
 
