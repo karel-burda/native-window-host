@@ -7,9 +7,7 @@ jobs:
        os: linux
        dist: xenial
        language: java
-       jdk:
-         - oraclejdk11
-         - oraclejdk12
+       jdk: oraclejdk12
        script:
          - set -e
 
