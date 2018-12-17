@@ -4,7 +4,8 @@ git:
 jobs:
   include:
      - stage: build
-       os: windows
+       os: linux
+       dist: xenial
        language: java
        jdk: oraclejdk8
        script:
