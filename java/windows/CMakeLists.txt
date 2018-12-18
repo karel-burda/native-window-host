@@ -1,11 +1,11 @@
-# Usage: cmake -Bbuild -H. -DJNA_PATH:PATH=<absolute-path-to-jna>
+# Usage: cmake -Bbuild -H. -DJNA_PATH:PATH=<absolute-path-to-jna> -D
 # JNA_PATH settings is optional, if the jna.jar and jna-platform.jar is located in the CLASSPATH
 
-cmake_minimum_required (VERSION 3.8 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
 
 project(native-window-embedder-java VERSION 0.4.0 LANGUAGES Java)
 
-find_package(Java REQUIRED)
+find_package(Java COMPONENTS Development REQUIRED)
 include(UseJava)
 
 if (NOT JNA_PATH)
