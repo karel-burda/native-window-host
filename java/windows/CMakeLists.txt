@@ -6,6 +6,10 @@ cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
 project(native-window-embedder-java VERSION 0.4.0 LANGUAGES Java)
 
 find_package(Java COMPONENTS Development REQUIRED)
+set(_jdk_version ${Java_VERSION_MAJOR}.${Java_VERSION_MINOR})
+
+message(STATUS "Found this Java version: ${Java_VERSION}, will use this JDK for compilation: ${_jdk_version}")
+
 include(UseJava)
 
 if (NOT JNA_PATH)
@@ -14,7 +18,7 @@ endif()
 
 message(STATUS "Using this path to the JNA: ${JNA_PATH}")
 
-list(APPEND CMAKE_JAVA_COMPILE_FLAGS -source 1.8 -target 1.8 -Werror -version)
+list(APPEND CMAKE_JAVA_COMPILE_FLAGS -source ${_jdk_version} -target ${_jdk_version} -Werror -version)
 
 message(STATUS "Using these compile flags: ${CMAKE_JAVA_COMPILE_FLAGS}")
 
