@@ -14,7 +14,9 @@ endif()
 
 message(STATUS "Using this path to the JNA: ${JNA_PATH}")
 
-set(APPEND CMAKE_JAVA_COMPILE_FLAGS "-source" "1.8" "-target" "1.8")
+list(APPEND CMAKE_JAVA_COMPILE_FLAGS -source 1.8 -target 1.8 -Werror -version)
+
+message(STATUS "Using these compile flags: ${CMAKE_JAVA_COMPILE_FLAGS}")
 
 add_jar(
     ${PROJECT_NAME}
