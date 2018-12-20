@@ -1,14 +1,20 @@
-# Usage: cmake -Bbuild -H. -DJNA_PATH:PATH=<absolute-path-to-jna> -D
-# JNA_PATH settings is optional, if the jna.jar and jna-platform.jar is located in the CLASSPATH
+# Usage: cmake -Bbuild -H. -DJNA_PATH:PATH=<absolute-path-to-jna> -DJDK_VERSION:STRING=<version>
+# JNA_PATH settings is optional, if the jna.jar and jna-platform.jar is located in the CLASSPATH, JDK_VERSION optional
 
 cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
 
 project(native-window-embedder-java VERSION 0.4.0 LANGUAGES Java)
 
-find_package(Java COMPONENTS Development REQUIRED)
-set(_jdk_version ${Java_VERSION_MAJOR}.${Java_VERSION_MINOR})
+add_subdirectory(win32-demo-helper-app)
 
-message(STATUS "Found this Java version: ${Java_VERSION}, will use this JDK for compilation: ${_jdk_version}")
+find_package(Java COMPONENTS Development REQUIRED)
+
+if (NOT DEFINED JDK_VERSION)
+    message(STATUS "JDK_VERSION not given, will use the ${JDK_VERSION}")
+    set(JDK_VERSION 1.8)
+endif()
+
+message(STATUS "Found this Java version: ${Java_VERSION}, will use this JDK for compilation: ${JDK_VERSION}")
 
 include(UseJava)
 
@@ -18,7 +24,7 @@ endif()
 
 message(STATUS "Using this path to the JNA: ${JNA_PATH}")
 
-list(APPEND CMAKE_JAVA_COMPILE_FLAGS -source ${_jdk_version} -target ${_jdk_version} -Werror -version)
+list(APPEND CMAKE_JAVA_COMPILE_FLAGS -source ${JDK_VERSION} -target ${JDK_VERSION} -Werror -version)
 
 message(STATUS "Using these compile flags: ${CMAKE_JAVA_COMPILE_FLAGS}")
 
@@ -53,13 +59,3 @@ add_custom_target(run-demo
         ${Java_JAVA_EXECUTABLE} -cp "${_jar_path_demo}${_separator}${_jar_path_core}${_separator}${JNA_PATH}/jna.jar${_separator}${JNA_PATH}/jna-platform.jar"
         com.github.karelburda.nativewindowembedder.demo.Main
     DEPENDS ${PROJECT_NAME} ${PROJECT_NAME}-demo)
-
-enable_testing()
-
-#add_test(NAME death-tests
-#         COMMAND testDriver --config $<CONFIGURATION> --exe $<TARGET_FILE:myexe>)
-
-#add_test(NAME unit-tests
-#         COMMAND testDriver --config $<CONFIGURATION> --exe $<TARGET_FILE:myexe>)
-
-# TODO: add test using ctest and custom command
