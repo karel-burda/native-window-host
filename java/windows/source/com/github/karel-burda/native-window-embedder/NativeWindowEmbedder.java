@@ -21,10 +21,14 @@ public class NativeWindowEmbedder extends Canvas {
         embedded = nativeWindowHandle;
 
         checkNativeHandleOfEmbedded();
+
+        System.out.println("NativeWindowEmbedder");
     }
 
     @Override
     public void removeNotify() {
+        System.out.println("removeNotify");
+
         // According to the WinAPI documentation, following should be called as well, but it doesn't work:
         // User32.INSTANCE.SetWindowLong(microcoreHwnd, User32.GWL_STYLE, User32.WS_POPUP);
         // TODO: ensure that the embedded window has correct style in order to become child
@@ -40,11 +44,14 @@ public class NativeWindowEmbedder extends Canvas {
 
     @Override
     public void paint(final Graphics graphics) {
+        System.out.println("paint");
+
         super.paint(graphics);
 
         embedNativeWindow();
 
         User32.INSTANCE.MoveWindow(embedded, 0, 0, getWidth(), getHeight(), true);
+        System.out.println("paint finished");
     }
 
     private void embedNativeWindow() {
@@ -53,10 +60,13 @@ public class NativeWindowEmbedder extends Canvas {
 
             if (embedded != null && embedder != null) {
                 // the following should be called according to the WinAPI as well, but doesn't work
-                // User32.INSTANCE.SetWindowLong(microcoreHwnd, User32.GWL_STYLE, User32.WS_CHILD);
+                 //User32.INSTANCE.SetWindowLong(embedded, User32.GWL_STYLE, User32.WS_CHILD);
 
+                System.out.println("Gonna set parent");
+                System.out.println(embedded);
+                System.out.println(embedder);
                 User32.INSTANCE.SetParent(embedded, embedder);
-                User32.INSTANCE.ShowWindow(embedded, User32.INSTANCE.SW_SHOW);
+                User32.INSTANCE.ShowWindow(embedder, User32.INSTANCE.SW_SHOW);
 
                 isHostingNativeWindow.set(true);
 
@@ -81,6 +91,9 @@ public class NativeWindowEmbedder extends Canvas {
             embedder = new HWND(Native.getComponentPointer(this));
         } catch (final Exception exception) {
             // TODO: component might not be on the screen, etc.
+            System.out.println("Error");
         }
+
+        System.out.println("embedder=" + embedder);
     }
 }

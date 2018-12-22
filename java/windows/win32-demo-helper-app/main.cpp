@@ -3,7 +3,7 @@
 
 #include <windows.h>
 
-int main(int argc, char ** argv)
+int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, PWSTR /*pCmdLine*/, const int nCmdShow)
 {
     const char windowClassName[] = "win32-demo-helper-app";
 
@@ -13,10 +13,10 @@ int main(int argc, char ** argv)
     windowClass.lpfnWndProc = DefWindowProc;
     windowClass.cbClsExtra = 0;
     windowClass.cbWndExtra = 0;
-    windowClass.hInstance = GetModuleHandle(nullptr);
+    windowClass.hInstance = hInstance;
     windowClass.hIcon = nullptr;
     windowClass.hCursor = nullptr;
-    windowClass.hbrBackground = nullptr;
+    windowClass.hbrBackground = static_cast<HBRUSH>(GetStockObject(DKGRAY_BRUSH));
     windowClass.lpszMenuName = nullptr;
     windowClass.lpszClassName = windowClassName;
     windowClass.hIconSm = nullptr;
@@ -30,12 +30,12 @@ int main(int argc, char ** argv)
 
     const HWND hwnd = CreateWindow(windowClassName,
                                   "win32-demo-helper-app",
-                                  WS_OVERLAPPEDWINDOW,
+                                  WS_POPUPWINDOW,
                                   CW_USEDEFAULT, CW_USEDEFAULT,
                                   800, 600,
                                   nullptr,
                                   nullptr,
-                                  GetModuleHandle(nullptr),
+                                  hInstance,
                                   nullptr);
 
     if (hwnd == nullptr)
