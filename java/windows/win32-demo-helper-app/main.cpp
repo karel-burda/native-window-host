@@ -3,7 +3,7 @@
 
 #include <windows.h>
 
-int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, PWSTR /*pCmdLine*/, const int nCmdShow)
+int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, PWSTR /*pCmdLine*/, const int /*nCmdShow*/)
 {
     const char windowClassName[] = "win32-demo-helper-app";
 
@@ -15,7 +15,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, PWSTR /*pC
     windowClass.cbWndExtra = 0;
     windowClass.hInstance = hInstance;
     windowClass.hIcon = nullptr;
-    windowClass.hCursor = nullptr;
+    windowClass.hCursor = LoadCursor(nullptr, IDC_ARROW);
     windowClass.hbrBackground = static_cast<HBRUSH>(GetStockObject(DKGRAY_BRUSH));
     windowClass.lpszMenuName = nullptr;
     windowClass.lpszClassName = windowClassName;
@@ -53,7 +53,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, PWSTR /*pC
     {
         if (messageSuccess == -1)
         {
-            // handle the error and possibly exit
+            std::cerr << "Unexpected message receive error, error code: " << std::to_string(GetLastError()) << std::endl;
+
+            return 2;
         }
         else
         {

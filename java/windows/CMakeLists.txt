@@ -30,9 +30,9 @@ message(STATUS "Using these compile flags: ${CMAKE_JAVA_COMPILE_FLAGS}")
 
 add_jar(
     ${PROJECT_NAME}
-        source/com/github/karel-burda/native-window-embedder/NativeWindowEmbedder.java
-        source/com/github/karel-burda/native-window-embedder/exceptions/InvalidNativeHandle.java
-
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/com/github/karel-burda/native-window-embedder/NativeWindowEmbedder.java
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/com/github/karel-burda/native-window-embedder/exceptions/InvalidNativeHandle.java
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/com/github/karel-burda/native-window-embedder/exceptions/NativeError.java
     INCLUDE_JARS
         ${JNA_PATH}/jna.jar
         ${JNA_PATH}/jna-platform.jar)
@@ -41,7 +41,7 @@ get_target_property(_jar_path_core ${PROJECT_NAME} JAR_FILE)
 
 add_jar(
     ${PROJECT_NAME}-demo
-        source/com/github/karel-burda/native-window-embedder/demo/Main.java
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/com/github/karel-burda/native-window-embedder/demo/Main.java
     INCLUDE_JARS
         ${_jar_path_core}
         ${JNA_PATH}/jna.jar
