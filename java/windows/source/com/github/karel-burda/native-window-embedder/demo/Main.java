@@ -26,7 +26,7 @@ public class Main {
         information.setSize(800,100);
         information.setVisible(true);
 
-        NativeWindowEmbedder embedder = new NativeWindowEmbedder("win32-demo-helper-app");
+        final NativeWindowEmbedder embedder = new NativeWindowEmbedder("win32-demo-helper-app");
         embedder.setSize(frame.getWidth(), frame.getHeight());
         embedder.setVisible(true);
 
