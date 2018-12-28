@@ -24,7 +24,7 @@ endif()
 
 message(STATUS "Using this path to the JNA: ${JNA_PATH}")
 
-list(APPEND CMAKE_JAVA_COMPILE_FLAGS -source ${JDK_VERSION} -target ${JDK_VERSION} -Werror -version)
+list(APPEND CMAKE_JAVA_COMPILE_FLAGS -source ${JDK_VERSION} -target ${JDK_VERSION} -version)
 
 message(STATUS "Using these compile flags: ${CMAKE_JAVA_COMPILE_FLAGS}")
 
