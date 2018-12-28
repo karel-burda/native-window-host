@@ -29,7 +29,7 @@ Java project is built using CMake: [CMakeLists.txt](java/windows/CMakeLists.txt)
 
 Projects is divided into separate targets that are built (and also run) using CMake:
   * `native-window-embedder-java.jar` -- makes the core functionality, depends on the JNA
-  * `native-window-embedder-java-demo.jar` -- demonstration example, uses the `NativeWindowEmbedder` class to embed win32 window 
+  * `native-window-embedder-java-demo.jar` -- demonstration example
   * `win32-demo-helper-app` -- creates win32 window programmatically and shows it on the screen
 
 So the build itself is being executed using:
@@ -60,7 +60,7 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
-        // using variant of cunstructor where window class name is known (we can also used when concrete HWND is known)
+        // using variant of cunstructor where window class name is known (the other one is when HWND is known)
         final NativeWindowEmbedder embedder = new NativeWindowEmbedder("win32-demo-helper-app");
         embedder.setSize(frame.getWidth(), frame.getHeight());
         embedder.setVisible(true);
