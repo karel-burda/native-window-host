@@ -17,6 +17,8 @@ Java implementation uses the JNA and `Canvas` component from the AWT. `Canvas` i
 
 The basic idea is that when this inherited `Canvas` component (i.e. `NativeWindowHost`) become parent window (`SetParent(...)` call in Windows), all system messages that are sent to the `Canvas` are also sent to the child (the native window). Because of this parent-child relationship, the GUI-related things like moving, resizing, work (more or less) out of the box.
 
+Demo is located at [java/windows/source/com/github/karel-burda/native-window-host/demo/Main.java](java/windows/source/com/github/karel-burda/native-window-host/demo/Main.java).
+
 ### C#
 The concept is using the `HwndHost` component on Windows from WPF that effectively works well without much code needed.
 
@@ -93,7 +95,12 @@ public class Main {
 ```
 
 ## Tests
-Currently none, because of difficult testing in headless (mode without window managers from the OS) environment on the CI.
+Currently no automatic tests, because of difficult testing in headless (mode without window managers from the OS) environment on the CI.
+
+### Java
+To perform manual integration test, you can run the demo. Steps are:
+  1. Run the `win32-demo-helper-app`
+  2. Run the demo (e.g. using CMake to execute the JAR)
 
 ## Continuous Integration
 ### Java
