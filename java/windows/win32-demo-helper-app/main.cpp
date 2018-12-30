@@ -56,7 +56,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, PWSTR /*pC
         {
             std::cerr << "Unexpected message receive error, error code: " << std::to_string(GetLastError()) << std::endl;
 
-            return 2;
+            return 3;
         }
         else
         {
