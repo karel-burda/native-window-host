@@ -3,7 +3,20 @@ git:
 
 jobs:
   include:
-     - stage: build
+     - stage: win32-demo-helper-app -- windows, release, msvc, 32-bit
+       os: windows
+       language: cpp
+       env: BUILD_TYPE="Release"
+       script:
+         - set -e
+
+         - cd common/windows/win32-demo-helper-app
+         - cmake -Bbuild -H. -DCMAKE_BUILD_TYPE:STRING=$BUILD_TYPE
+         - cmake --build build
+
+         - set +e
+
+     - stage: native-window-host, example -- linux, jdk 1.8, 64-bit
        os: linux
        dist: xenial
        language: java
