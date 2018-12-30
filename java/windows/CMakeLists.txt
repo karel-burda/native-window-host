@@ -3,7 +3,7 @@
 
 cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
 
-project(native-window-embedder-java VERSION 0.9.0 LANGUAGES Java)
+project(native-window-host-java VERSION 0.9.0 LANGUAGES Java)
 
 find_package(Java COMPONENTS Development REQUIRED)
 
@@ -28,9 +28,9 @@ message(STATUS "Using these compile flags: ${CMAKE_JAVA_COMPILE_FLAGS}")
 
 add_jar(
     ${PROJECT_NAME}
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/com/github/karel-burda/native-window-embedder/NativeWindowEmbedder.java
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/com/github/karel-burda/native-window-embedder/exceptions/InvalidNativeHandle.java
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/com/github/karel-burda/native-window-embedder/exceptions/NativeError.java
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/com/github/karel-burda/native-window-host/NativeWindowHost.java
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/com/github/karel-burda/native-window-host/exceptions/InvalidNativeHandle.java
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/com/github/karel-burda/native-window-host/exceptions/NativeError.java
     INCLUDE_JARS
         ${JNA_PATH}/jna.jar
         ${JNA_PATH}/jna-platform.jar)
@@ -39,7 +39,7 @@ get_target_property(_jar_path_core ${PROJECT_NAME} JAR_FILE)
 
 add_jar(
     ${PROJECT_NAME}-demo
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/com/github/karel-burda/native-window-embedder/demo/Main.java
+        ${CMAKE_CURRENT_SOURCE_DIR}/source/com/github/karel-burda/native-window-host/demo/Main.java
     INCLUDE_JARS
         ${_jar_path_core}
         ${JNA_PATH}/jna.jar
@@ -55,5 +55,5 @@ endif()
 add_custom_target(run-demo
     COMMAND
         ${Java_JAVA_EXECUTABLE} -cp "${_jar_path_demo}${_separator}${_jar_path_core}${_separator}${JNA_PATH}/jna.jar${_separator}${JNA_PATH}/jna-platform.jar"
-        com.github.karelburda.nativewindowembedder.demo.Main
+        com.github.karelburda.nativewindowhost.demo.Main
     DEPENDS ${PROJECT_NAME} ${PROJECT_NAME}-demo)

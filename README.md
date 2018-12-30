@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/karel-burda/native-window-embedder.svg?branch=develop)](https://travis-ci.org/karel-burda/native-window-embedder)
 
 ## Introduction
-`native-windows-embedder` demonstrates Proof of Concept how can native windows (e.g win32 window on Windows) might be embedded (hosted) in Java and C# GUI elements.
+`native-window-host` demonstrates Proof of Concept how can native windows (e.g win32 window on Windows) might be embedded/hosted (hosted) in Java and C# GUI elements.
 
 Java concept uses `Java Native Access` and C# uses `HwndHost` from the WPF framework.
 
@@ -36,8 +36,8 @@ cmake --build build
 Java project is built using CMake: [CMakeLists.txt](java/windows/CMakeLists.txt).
 
 Projects is divided into separate targets that are built (and also run) using CMake:
-  * `native-window-embedder-java.jar` -- makes the core functionality, depends on the JNA
-  * `native-window-embedder-java-demo.jar` -- demonstration example
+  * `native-window-host-java.jar` -- makes the core functionality, depends on the JNA
+  * `native-window-host-java-demo.jar` -- demonstration example
 
 The build itself is being executed using:
 ```cmake
@@ -52,16 +52,16 @@ Demo might be run using (after the generation step is done, you can skip the `cm
 cmake --build build --target run-demo
 ```
 
-Core class providing functionality is [NativeWindowEmbedder.java](java/windows/source/com/github/karel-burda/native-window-embedder/NativeWindowEmbedder.java)
+Core class providing functionality is [NativeWindowHost.java](java/windows/source/com/github/karel-burda/native-window-host/NativeWindowHost.java)
 
 ### C#
 To be done.
 
 ## Examples
-For full use cases, see [Main.java](java/windows/source/com/github/karel-burda/native-window-embedder/demo/Main.java).
+For full use cases, see [Main.java](java/windows/source/com/github/karel-burda/native-window-host/demo/Main.java).
 
 ```java
-import com.github.karelburda.nativewindowembedder.NativeWindowEmbedder;
+import com.github.karelburda.nativewindowhost.NativeWindowHost;
 
 public class Main {
     public static void main(String[] args) {
@@ -70,18 +70,18 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
-        // using variant of cunstructor where window class name is known (the other one is when HWND is known)
-        final NativeWindowEmbedder embedder = new NativeWindowEmbedder("win32-demo-helper-app");
-        embedder.setSize(frame.getWidth(), frame.getHeight());
-        embedder.setVisible(true);
+        // using variant of constructor where window class name is known (the other one is when HWND is known)
+        final NativeWindowHost host = new NativeWindowHost("win32-demo-helper-app");
+        host.setSize(frame.getWidth(), frame.getHeight());
+        host.setVisible(true);
 
-        frame.add(embedder, BorderLayout.CENTER);
+        frame.add(host, BorderLayout.CENTER);
 
         // upon closing, we may want to "release" the native handle from the embedder
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(final WindowEvent event) {
-                embedder.release();
+                host.release();
 
                 System.exit(0);
             }
@@ -95,10 +95,10 @@ Currently none, because of difficult testing in headless (mode without window ma
 
 ## Continuous Integration
 ### Java
-Continuous Integration is now being run on Linux on Travis: https://travis-ci.org/karel-burda/native-window-embedder.
+Continuous Integration is now being run on Linux on Travis: https://travis-ci.org/karel-burda/native-window-host.
 
 The project is using these jobs:
   * `win32-demo-helper-app -- windows, release, msvc, 32-bit`
-  * `native-window-embedder, example -- linux, jdk 1.8, 64-bit`
+  * `native-window-host, example -- linux, jdk 1.8, 64-bit`
 
 Build of the project, core and demo, is performed, see [.travis.yml](.travis.yml).
