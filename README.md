@@ -1,4 +1,4 @@
-![Version](https://img.shields.io/badge/version-0.8.0-green.svg)
+![Version](https://img.shields.io/badge/java-0.8.0-green.svg)
 [![License](https://img.shields.io/badge/license-MIT_License-green.svg?style=flat)](LICENSE)
 [![Build Status](https://travis-ci.org/karel-burda/native-window-embedder.svg?branch=develop)](https://travis-ci.org/karel-burda/native-window-embedder)
 
@@ -24,15 +24,22 @@ The only catch is to use set the correct window style to the native window (`WS_
 **Currently not implemented.**
 
 ## Usage
+C# and Java uses helper app that creates and shows dummy window with specified class name, this resides in [common/windows/win32-helper-app](common/windows/win32-helper-app).
+
+Build process is meant to be performed like this:
+```cmake
+cmake -Bbuild -H.
+cmake --build build
+```
+
 ### Java
 Java project is built using CMake: [CMakeLists.txt](java/windows/CMakeLists.txt).
 
 Projects is divided into separate targets that are built (and also run) using CMake:
   * `native-window-embedder-java.jar` -- makes the core functionality, depends on the JNA
   * `native-window-embedder-java-demo.jar` -- demonstration example
-  * `win32-demo-helper-app` -- creates win32 window programmatically and shows it on the screen
 
-So the build itself is being executed using:
+The build itself is being executed using:
 ```cmake
 cmake -Bbuild -H. -DJNA_PATH:PATH=<absolute-path-to-jna> -DJDK_VERSION:STRING=<version>
 cmake --build build
@@ -46,6 +53,9 @@ cmake --build build --target run-demo
 ```
 
 Core class providing functionality is [NativeWindowEmbedder.java](java/windows/source/com/github/karel-burda/native-window-embedder/NativeWindowEmbedder.java)
+
+### C#
+To be done.
 
 ## Examples
 For full use cases, see [Main.java](java/windows/source/com/github/karel-burda/native-window-embedder/demo/Main.java).
@@ -88,6 +98,7 @@ Currently none, because of difficult testing in headless (mode without window ma
 Continuous Integration is now being run on Linux on Travis: https://travis-ci.org/karel-burda/native-window-embedder.
 
 The project is using these jobs:
-  * `native-window-embedder, exaple -- linux, jdk 1.8, 64-bit`
+  * `win32-demo-helper-app -- windows, release, msvc, 32-bit`
+  * `native-window-embedder, example -- linux, jdk 1.8, 64-bit`
 
 Build of the project, core and demo, is performed, see [.travis.yml](.travis.yml).

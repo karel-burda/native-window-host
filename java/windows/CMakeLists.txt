@@ -3,9 +3,7 @@
 
 cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
 
-project(native-window-embedder-java VERSION 0.8.0 LANGUAGES Java)
-
-add_subdirectory(win32-demo-helper-app)
+project(native-window-embedder-java VERSION 0.9.0 LANGUAGES Java)
 
 find_package(Java COMPONENTS Development REQUIRED)
 
