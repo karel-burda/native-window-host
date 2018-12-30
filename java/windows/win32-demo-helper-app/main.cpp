@@ -29,14 +29,14 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, PWSTR /*pC
     }
 
     const HWND hwnd = CreateWindow(windowClassName,
-                                  "win32-demo-helper-app",
-                                  WS_POPUPWINDOW,
-                                  CW_USEDEFAULT, CW_USEDEFAULT,
-                                  800, 600,
-                                  nullptr,
-                                  nullptr,
-                                  hInstance,
-                                  nullptr);
+                                   "win32-demo-helper-app",
+                                   WS_POPUPWINDOW,
+                                   CW_USEDEFAULT, CW_USEDEFAULT,
+                                   800, 600,
+                                   nullptr,
+                                   nullptr,
+                                   hInstance,
+                                   nullptr);
 
     if (hwnd == nullptr)
     {
@@ -47,6 +47,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, PWSTR /*pC
 
     ShowWindow(hwnd, SW_SHOW);
     UpdateWindow(hwnd);
+
     MSG msg = {0};
     BOOL messageSuccess = FALSE;
     while ((messageSuccess = GetMessage(&msg, nullptr, 0, 0)) != 0)
