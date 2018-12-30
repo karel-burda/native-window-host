@@ -1,4 +1,5 @@
-![Version](https://img.shields.io/badge/java-0.8.0-green.svg)
+![Version](https://img.shields.io/badge/csharp-0.0.0-green.svg)
+![Version](https://img.shields.io/badge/java-0.9.0-green.svg)
 [![License](https://img.shields.io/badge/license-MIT_License-green.svg?style=flat)](LICENSE)
 [![Build Status](https://travis-ci.org/karel-burda/native-window-embedder.svg?branch=develop)](https://travis-ci.org/karel-burda/native-window-embedder)
 
@@ -14,7 +15,7 @@ See [java](java) for Java implementation and [C#](csharp) for C# implementation 
 ### Java
 Java implementation uses the JNA and `Canvas` component from the AWT. `Canvas` is used because it's a heavy-weight component (it has its own handle, e.g. `HWND` on Windows) and thus has ability to become a parent of native system window.
 
-The basic idea is that when this inherited `Canvas` component become parent window (`SetParent(...)` call in Windows), all system messages that are sent to the `Canvas` are also sent to the child (the native window). Because of this parent-child relationship, the GUI-related things like moving, resizing, work (more or less) out of the box.
+The basic idea is that when this inherited `Canvas` component (i.e. `NativeWindowHost`) become parent window (`SetParent(...)` call in Windows), all system messages that are sent to the `Canvas` are also sent to the child (the native window). Because of this parent-child relationship, the GUI-related things like moving, resizing, work (more or less) out of the box.
 
 ### C#
 The concept is using the `HwndHost` component on Windows from WPF that effectively works well without much code needed.
@@ -24,7 +25,7 @@ The only catch is to use set the correct window style to the native window (`WS_
 **Currently not implemented.**
 
 ## Usage
-C# and Java uses helper app that creates and shows dummy window with specified class name, this resides in [common/windows/win32-helper-app](common/windows/win32-helper-app).
+C# and Java uses helper app that creates and shows dummy window with specified class name, this resides in [common/windows/win32-demo-helper-app](common/windows/win32-demo-helper-app).
 
 Build process is meant to be performed like this:
 ```cmake
@@ -60,6 +61,7 @@ To be done.
 ## Examples
 For full use cases, see [Main.java](java/windows/source/com/github/karel-burda/native-window-host/demo/Main.java).
 
+### Java
 ```java
 import com.github.karelburda.nativewindowhost.NativeWindowHost;
 
@@ -95,7 +97,7 @@ Currently none, because of difficult testing in headless (mode without window ma
 
 ## Continuous Integration
 ### Java
-Continuous Integration is now being run on Linux on Travis: https://travis-ci.org/karel-burda/native-window-host.
+Continuous Integration is now being run on Linux on Travis: https://travis-ci.org/karel-burda/native-window-embedder.
 
 The project is using these jobs:
   * `win32-demo-helper-app -- windows, release, msvc, 32-bit`
