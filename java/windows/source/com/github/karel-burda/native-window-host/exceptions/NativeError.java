@@ -1,4 +1,4 @@
-package com.github.karelburda.nativewindowembedder.exceptions;
+package com.github.karelburda.nativewindowhost.exceptions;
 
 public class NativeError extends RuntimeException {
     public static void throwWhenCodeIsNonZero(final String message, final int code) {

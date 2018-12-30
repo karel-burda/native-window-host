@@ -1,4 +1,4 @@
-package com.github.karelburda.nativewindowembedder.exceptions;
+package com.github.karelburda.nativewindowhost.exceptions;
 
 public class InvalidNativeHandle extends RuntimeException {
     public InvalidNativeHandle(final String message) {

@@ -1,15 +1,13 @@
-package com.github.karelburda.nativewindowembedder.demo;
+package com.github.karelburda.nativewindowhost.demo;
 
 import java.awt.BorderLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.GridBagLayout;
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import com.github.karelburda.nativewindowembedder.NativeWindowEmbedder;
+import com.github.karelburda.nativewindowhost.NativeWindowHost;
 
 public class Main {
     private static void showUsage() {
@@ -26,16 +24,16 @@ public class Main {
         information.setSize(800,100);
         information.setVisible(true);
 
-        final NativeWindowEmbedder embedder = new NativeWindowEmbedder("win32-demo-helper-app");
-        embedder.setSize(frame.getWidth(), frame.getHeight());
-        embedder.setVisible(true);
+        final NativeWindowHost host = new NativeWindowHost("win32-demo-helper-app");
+        host.setSize(frame.getWidth(), frame.getHeight());
+        host.setVisible(true);
 
-        frame.add(embedder, BorderLayout.CENTER);
+        frame.add(host, BorderLayout.CENTER);
 
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(final WindowEvent event) {
-                embedder.release();
+                host.release();
 
                 System.exit(0);
             }
