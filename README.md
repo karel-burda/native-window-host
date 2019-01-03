@@ -1,7 +1,7 @@
 ![Version](https://img.shields.io/badge/csharp-0.0.0-green.svg)
 ![Version](https://img.shields.io/badge/java-0.9.0-green.svg)
 [![License](https://img.shields.io/badge/license-MIT_License-green.svg?style=flat)](LICENSE)
-[![Build Status](https://travis-ci.org/karel-burda/native-window-embedder.svg?branch=develop)](https://travis-ci.org/karel-burda/native-window-embedder)
+[![Build Status](https://travis-ci.org/karel-burda/native-window-host.svg?branch=develop)](https://travis-ci.org/karel-burda/native-window-host)
 
 ## Introduction
 `native-window-host` demonstrates Proof of Concept how can native windows (e.g win32 window on Windows) might be embedded/hosted (hosted) in Java and C# GUI elements.
