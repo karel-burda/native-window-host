@@ -1,6 +1,6 @@
-![Version](https://img.shields.io/badge/csharp-0.0.0-green.svg)
-![Version](https://img.shields.io/badge/java-0.9.0-green.svg)
-[![License](https://img.shields.io/badge/license-MIT_License-green.svg?style=flat)](LICENSE)
+![Version](https://img.shields.io/badge/csharp-0.0.0-blue.svg)
+![Version](https://img.shields.io/badge/java-0.9.1-blue.svg)
+[![License](https://img.shields.io/badge/license-MIT_License-blue.svg?style=flat)](LICENSE)
 [![Build Status](https://travis-ci.org/karel-burda/native-window-host.svg?branch=develop)](https://travis-ci.org/karel-burda/native-window-host)
 
 ## Introduction

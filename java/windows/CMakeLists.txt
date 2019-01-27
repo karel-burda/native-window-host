@@ -3,7 +3,7 @@
 
 cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
 
-project(native-window-host-java VERSION 0.9.0 LANGUAGES Java)
+project(native-window-host-java VERSION 0.9.1 LANGUAGES Java)
 
 find_package(Java COMPONENTS Development REQUIRED)
 
