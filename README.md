@@ -74,7 +74,7 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
-        // using variant of constructor where window class name is known (the other one is when HWND is known)
+        // using variant of constructor where window class name is known (the other one is with HWND)
         final NativeWindowHost host = new NativeWindowHost("win32-demo-helper-app");
         host.setSize(frame.getWidth(), frame.getHeight());
         host.setVisible(true);
@@ -104,7 +104,7 @@ To perform manual integration test, you can run the demo. Steps are:
 
 ## Continuous Integration
 ### Java
-Continuous Integration is now being run on Linux on Travis: https://travis-ci.org/karel-burda/native-window-embedder.
+Continuous Integration is now being run on Linux on Travis: https://travis-ci.org/karel-burda/native-window-host.
 
 The project is using these jobs:
   * `win32-demo-helper-app -- windows, release, msvc, 32-bit`
