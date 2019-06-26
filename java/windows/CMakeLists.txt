@@ -28,9 +28,9 @@ message(STATUS "Using these compile flags: ${CMAKE_JAVA_COMPILE_FLAGS}")
 
 add_jar(
     ${PROJECT_NAME}
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/com/github/karel-burda/native-window-host/NativeWindowHost.java
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/com/github/karel-burda/native-window-host/exceptions/InvalidNativeHandle.java
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/com/github/karel-burda/native-window-host/exceptions/NativeError.java
+        ${CMAKE_CURRENT_LIST_DIR}/source/com/github/karel-burda/native-window-host/NativeWindowHost.java
+        ${CMAKE_CURRENT_LIST_DIR}/source/com/github/karel-burda/native-window-host/exceptions/InvalidNativeHandle.java
+        ${CMAKE_CURRENT_LIST_DIR}/source/com/github/karel-burda/native-window-host/exceptions/NativeError.java
     INCLUDE_JARS
         ${JNA_PATH}/jna.jar
         ${JNA_PATH}/jna-platform.jar)
@@ -39,7 +39,7 @@ get_target_property(_jar_path_core ${PROJECT_NAME} JAR_FILE)
 
 add_jar(
     ${PROJECT_NAME}-demo
-        ${CMAKE_CURRENT_SOURCE_DIR}/source/com/github/karel-burda/native-window-host/demo/Main.java
+        ${CMAKE_CURRENT_LIST_DIR}/source/com/github/karel-burda/native-window-host/demo/Main.java
     INCLUDE_JARS
         ${_jar_path_core}
         ${JNA_PATH}/jna.jar
